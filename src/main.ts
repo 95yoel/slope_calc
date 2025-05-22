@@ -1,5 +1,7 @@
 import './style.css'
 import './components/Calculator'
+import './components/Form'
+import './components/CustomInput'
 
 
 document.addEventListener('DOMContentLoaded',()=>{

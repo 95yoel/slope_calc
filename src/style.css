@@ -8,6 +8,50 @@ body{
     overflow: hidden;
 }
 
+.form-actions{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+button{
+    height: 2rem;
+    cursor: pointer;
+}
+
+.form-button-send{
+    margin-top: 1rem;
+    padding: 0.2rem;
+    width: 100%;
+    color: white;
+    background-color: green;
+    outline:none;
+    border:none;
+    border-radius: 0.2rem;
+    transition: 0.3s;
+}
+.form-button-send:hover{
+    transform: scale(0.98);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}
+
+.form-button-delete{
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.2rem;
+    color: white;
+    background-color: crimson;
+    outline:none;
+    border:none;
+    border-radius: 0.2rem;
+    transition: 0.3s;
+}
+.form-button-delete:hover{
+    transform: scale(0.98);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}
+
+
 main{
     margin:0;
     background-color: #fafbfd;
@@ -31,6 +75,15 @@ header:hover{
     background-color: #e2e2e2;
 }
 
+section{
+    max-height: 87vh;
+    overflow: auto;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+
+
 footer{
     position: absolute;
     display: flex;
@@ -50,3 +103,46 @@ footer a{
 footer:hover{
     background-color: #e2e2e2;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+thead {
+  background-color: #1e3a8a; 
+  color: #ffffff;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+tbody tr:hover {
+  background-color: #edf2f7;
+}
+
+td {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
