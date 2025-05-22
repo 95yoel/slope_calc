@@ -12,7 +12,7 @@ export class Calculator extends HTMLElement {
   private clearAllHandler = () => this.onClearAll()
 
   async connectedCallback() {
-    const frag = await Utils.fetchUrl('/calculator.html')
+    const frag = await Utils.fetchUrl('calculator.html')
     this.innerHTML = frag
     const topSection = this.querySelector('.top-section')
     const bottomSection = this.querySelector('.bottom-section')

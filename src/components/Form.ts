@@ -7,7 +7,7 @@ export class Form extends HTMLElement {
   private clearAllHandler = () => this.onClearAll()
 
   async connectedCallback() {
-    const html = await Utils.fetchUrl("/form.html")
+    const html = await Utils.fetchUrl("form.html")
     this.innerHTML = html
 
     const formEl = this.querySelector<HTMLFormElement>('#form')!
