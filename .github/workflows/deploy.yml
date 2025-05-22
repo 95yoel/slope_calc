@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Instalar Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Instalar dependencias (limpio)
+      - name: Install dependencies
         run: |
           rm -rf node_modules package-lock.json
           npm install
@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy a GitHub Pages
+      - name: Deploy GitHub pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
