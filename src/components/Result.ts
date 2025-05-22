@@ -20,7 +20,7 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
         <thead>
           <tr>
             <th>#</th><th>Dist.</th><th>Desn.</th><th>Pend.</th>
-            <th>Long. ini</th><th>Long. fin</th><th>Alt. ini</th><th>Alt. fin</th>
+            <th class="hide-mobile">Long. ini</th><th class="hide-mobile">Long. fin</th><th class="hide-mobile">Alt. ini</th class="hide-mobile"><th>Alt. fin</th>
           </tr>
         </thead>
         <tbody class="segments-body"></tbody>
@@ -40,10 +40,10 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
       <td>${segment.distance.toFixed(2)} m</td>
       <td>${segment.desnivel.toFixed(2)} m</td>
       <td>${(segment.slope * 100).toFixed(2)}%</td>
-      <td>${segment.initialLength} km</td>
-      <td>${segment.finalLength} km</td>
-      <td>${segment.initialElevation} m</td>
-      <td>${segment.finalElevation} m</td>
+      <td class="hide-mobile">${segment.initialLength} km</td>
+      <td class="hide-mobile">${segment.finalLength} km</td>
+      <td class="hide-mobile">${segment.initialElevation} m</td>
+      <td class="hide-mobile">${segment.finalElevation} m</td>
     `
     this.tbody.appendChild(row)
 
