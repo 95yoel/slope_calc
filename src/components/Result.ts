@@ -1,5 +1,6 @@
 import { Analytics } from '../analytics/Analytics'
-import { Formatters } from '../utils/formatters'
+import { Formatters } from '../utils/Formatters'
+
 
 
 export interface HTMLSlopeResultElement extends HTMLElement {
