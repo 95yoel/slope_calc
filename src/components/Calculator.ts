@@ -1,4 +1,4 @@
-import calculatorTemplate from '../../public/calculator.html?raw'
+import calculatorTemplate from '../templates/calculator.html?raw'
 import { Analytics, type SegmentData } from "../analytics/Analytics"
 import "./Form"
 import "./Result"

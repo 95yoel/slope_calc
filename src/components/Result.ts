@@ -1,7 +1,7 @@
 import { Analytics } from '../analytics/Analytics'
 import { Formatters } from '../utils/Formatters'
 import { ReportGenerator } from '../utils/ReportGenerator'
-import ResultTemplate from '../../public/result.html?raw'
+import ResultTemplate from '../templates/result.html?raw'
 import type { CustomInput } from './CustomInput'
 
 export interface HTMLSlopeResultElement extends HTMLElement {

@@ -1,5 +1,5 @@
 import type { CustomInput } from "./CustomInput"
-import formTemplate from '../../public/form.html?raw'
+import formTemplate from '../templates/form.html?raw'
 
 export class Form extends HTMLElement {
   private submitHandler = (e: Event) => this.onSubmit(e)
