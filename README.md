@@ -1,5 +1,5 @@
 
-# 🧮 SlopeCalc
+# 📈 SlopeCalc
 
 [![CI](https://github.com/95yoel/slope_calc/actions/workflows/deploy.yml/badge.svg)](https://github.com/95yoel/slope_calc/actions/workflows/deploy.yml)
 ![minzipped size](https://img.shields.io/badge/minzipped%20size-~5KB-blue)
