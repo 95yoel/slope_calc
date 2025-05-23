@@ -17,7 +17,6 @@ export class Calculator extends HTMLElement {
     const frag = await Utils.fetchUrl('calculator.html')
     this.innerHTML = frag
 
-
     this.analytics = await Analytics.create()
 
     const bottom = this.querySelector('.bottom-section')!

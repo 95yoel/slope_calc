@@ -1,6 +1,7 @@
 import { Analytics } from '../analytics/Analytics'
 import { Formatters } from '../utils/Formatters'
 import { ReportGenerator } from '../utils/ReportGenerator'
+import { Utils } from '../utils/Utils'
 import type { CustomInput } from './CustomInput'
 
 export interface HTMLSlopeResultElement extends HTMLElement {
@@ -16,39 +17,10 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
   private toggleDefault!: HTMLInputElement
   private titleControl!: HTMLElement
 
-  init() {
-    this.innerHTML = `
-      <div class="controls">
-        <button class="export-btn" hidden title="Exportar informe">📥 Exportar PDF</button>
-        <div class="title-control" hidden>
-          <custom-input class="title-input" placeholder="Título del informe" hidden></custom-input>
-          <label>
-            <input type="checkbox" class="toggle-default" checked>
-            <small>Nombre de informe por defecto</small>
-          </label>
-        </div>
-      </div>
-      <div class="summary">
-        <p><strong>Distancia total:</strong> <span class="total-dist">0.00 m</span></p>
-        <p><strong>Desnivel total:</strong> <span class="total-desn">0.00 m</span></p>
-        <p><strong>Pendiente media:</strong> <span class="avg-slope">0.00 %</span></p>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Dist.</th>
-            <th>Desn.</th>
-            <th>Pend.</th>
-            <th class="hide-mobile">Long. ini</th>
-            <th class="hide-mobile">Long. fin</th>
-            <th class="hide-mobile">Alt. ini</th>
-            <th class="hide-mobile">Alt. fin</th>
-          </tr>
-        </thead>
-        <tbody class="segments-body"></tbody>
-      </table>
-    `
+  async init() {
+    
+    const frag = await Utils.fetchUrl('result.html')
+    this.innerHTML = frag
 
     this.exportBtn = this.querySelector('.export-btn') as HTMLButtonElement
     this.titleControl = this.querySelector('.title-control') as HTMLElement
@@ -75,13 +47,13 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
     const row = document.createElement('tr')
     row.innerHTML = `
       <td>${segment.id}</td>
-      <td>${segment.distance.toFixed(2)} m</td>
-      <td>${segment.desnivel.toFixed(2)} m</td>
-      <td>${(segment.slope * 100).toFixed(2)}%</td>
-      <td class="hide-mobile">${segment.initialLength} km</td>
-      <td class="hide-mobile">${segment.finalLength} km</td>
-      <td class="hide-mobile">${segment.initialElevation} m</td>
-      <td class="hide-mobile">${segment.finalElevation} m</td>
+      <td>${Formatters.toMeters(segment.distance)}</td>
+      <td>${Formatters.toMeters(segment.desnivel)}</td>
+      <td>${Formatters.toPercent(segment.slope)}</td>
+      <td class="hide-mobile">${Formatters.toKilometers(segment.initialLength)}</td>
+      <td class="hide-mobile">${Formatters.toKilometers(segment.finalLength)}</td>
+      <td class="hide-mobile">${Formatters.toMeters(segment.initialElevation)}</td>
+      <td class="hide-mobile">${Formatters.toMeters(segment.finalElevation)}</td>
     `
     this.tbody.appendChild(row)
 
