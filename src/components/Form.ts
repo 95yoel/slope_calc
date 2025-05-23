@@ -1,5 +1,5 @@
-import { Utils } from "../utils/Utils"
 import type { CustomInput } from "./CustomInput"
+import formTemplate from '../../public/form.html?raw'
 
 export class Form extends HTMLElement {
   private submitHandler = (e: Event) => this.onSubmit(e)
@@ -7,8 +7,7 @@ export class Form extends HTMLElement {
   private clearAllHandler = () => this.onClearAll()
 
   async connectedCallback() {
-    const html = await Utils.fetchUrl("form.html")
-    this.innerHTML = html
+    this.innerHTML = formTemplate
 
     const formEl = this.querySelector<HTMLFormElement>('#form')!
     const inputs = Array.from(

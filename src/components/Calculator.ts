@@ -1,4 +1,4 @@
-import { Utils } from "../utils/Utils"
+import calculatorTemplate from '../../public/calculator.html?raw'
 import { Analytics, type SegmentData } from "../analytics/Analytics"
 import "./Form"
 import "./Result"
@@ -14,8 +14,7 @@ export class Calculator extends HTMLElement {
 
   async connectedCallback() {
     
-    const frag = await Utils.fetchUrl('calculator.html')
-    this.innerHTML = frag
+    this.innerHTML = calculatorTemplate
 
     this.analytics = await Analytics.create()
 

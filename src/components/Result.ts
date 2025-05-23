@@ -1,7 +1,7 @@
 import { Analytics } from '../analytics/Analytics'
 import { Formatters } from '../utils/Formatters'
 import { ReportGenerator } from '../utils/ReportGenerator'
-import { Utils } from '../utils/Utils'
+import ResultTemplate from '../../public/result.html?raw'
 import type { CustomInput } from './CustomInput'
 
 export interface HTMLSlopeResultElement extends HTMLElement {
@@ -19,8 +19,7 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
 
   async init() {
     
-    const frag = await Utils.fetchUrl('result.html')
-    this.innerHTML = frag
+    this.innerHTML = ResultTemplate
 
     this.exportBtn = this.querySelector('.export-btn') as HTMLButtonElement
     this.titleControl = this.querySelector('.title-control') as HTMLElement
