@@ -1,4 +1,6 @@
 import { Analytics } from '../analytics/Analytics'
+import { Formatters } from '../utils/formatters'
+
 
 export interface HTMLSlopeResultElement extends HTMLElement {
   init: () => void
@@ -60,13 +62,17 @@ export class Result extends HTMLElement implements HTMLSlopeResultElement {
   }
 
   private updateSummary(analytics: Analytics) {
-    (this.querySelector('.total-dist')! as HTMLElement).textContent =
-      analytics.getTotalDistance().toFixed(2) + " m";
-    (this.querySelector('.total-desn')! as HTMLElement).textContent =
-      analytics.getTotalDesnivel().toFixed(2)+ " m";
-    (this.querySelector('.avg-slope')! as HTMLElement).textContent =
-      (analytics.getAverageSlope() * 100).toFixed(2) + ' %'
+  const summary = {
+    dist: Formatters.toMeters(analytics.getTotalDistance()),
+    desn: Formatters.toMeters(analytics.getTotalDesnivel()),
+    slope: Formatters.toPercent(analytics.getAverageSlope())
   }
+
+  this.querySelector('.total-dist')!.textContent = summary.dist
+  this.querySelector('.total-desn')!.textContent = summary.desn
+  this.querySelector('.avg-slope')!.textContent = summary.slope
+}
+
 }
 
 customElements.define('slope-result', Result)

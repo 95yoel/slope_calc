@@ -1,4 +1,4 @@
-import { Utils } from "../Utils"
+import { Utils } from "../utils/Utils"
 import type { CustomInput } from "./CustomInput"
 
 export class Form extends HTMLElement {

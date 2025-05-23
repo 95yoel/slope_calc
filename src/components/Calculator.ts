@@ -1,4 +1,4 @@
-import { Utils } from "../Utils"
+import { Utils } from "../utils/Utils"
 import { Analytics, type SegmentData } from "../analytics/Analytics"
 import "./Form"
 import "./Result"
