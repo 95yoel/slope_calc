@@ -2,7 +2,6 @@ import { Analytics } from '../analytics/Analytics'
 import { Formatters } from '../utils/Formatters'
 
 
-
 export interface HTMLSlopeResultElement extends HTMLElement {
   init: () => void
   addSegment: (analytics: Analytics) => void

@@ -1,3 +1,5 @@
+import { SegmentStore } from '../db/segments-db'
+
 export interface SegmentData {
   initialLength: number
   finalLength: number
@@ -15,7 +17,16 @@ export interface Segment extends SegmentData {
 export class Analytics {
   private segments: Segment[] = []
 
-  addSegment(data: SegmentData) {
+  private constructor(initial: Segment[]) {
+    this.segments = initial
+  }
+
+  static async create(): Promise<Analytics> {
+    const stored = await SegmentStore.getAll()  
+    return new Analytics(stored)
+  }
+
+  async addSegment(data: SegmentData) {
     const { initialLength, finalLength, initialElevation, finalElevation } = data
     const distance = (finalLength - initialLength) * 1000
     const desnivel = finalElevation - initialElevation
@@ -31,7 +42,9 @@ export class Analytics {
       desnivel,
       slope
     }
+
     this.segments.push(segment)
+    await SegmentStore.save(segment)              
   }
 
   getSegments(): Segment[] {
@@ -51,7 +64,8 @@ export class Analytics {
     return totalDist !== 0 ? this.getTotalDesnivel() / totalDist : 0
   }
 
-  clearSegments() {
+  async clearSegments() {
     this.segments = []
+    await SegmentStore.clear()
   }
 }

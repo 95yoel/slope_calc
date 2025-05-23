@@ -5,27 +5,34 @@ import "./Result"
 import type { HTMLSlopeResultElement } from "./Result"
 
 export class Calculator extends HTMLElement {
-  private analytics = new Analytics()
+  private analytics!: Analytics
   private result!: HTMLSlopeResultElement
   private formEl?: HTMLElement
-  private segmentHandler = (ev: Event) => this.onSegment(ev)
-  private clearAllHandler = () => this.onClearAll()
+
+  private segmentHandler = async (ev: Event) => this.onSegment(ev)
+  private clearAllHandler = async () => this.onClearAll()
 
   async connectedCallback() {
+    
     const frag = await Utils.fetchUrl('calculator.html')
     this.innerHTML = frag
-    const topSection = this.querySelector('.top-section')
-    const bottomSection = this.querySelector('.bottom-section')
-    if (!topSection || !bottomSection) return
 
+
+    this.analytics = await Analytics.create()
+
+    const bottom = this.querySelector('.bottom-section')!
     this.result = document.createElement('slope-result') as HTMLSlopeResultElement
-    bottomSection.appendChild(this.result)
+    bottom.appendChild(this.result)
     this.result.init()
+
+    this.analytics.getSegments().forEach(() => {
+      this.result.addSegment(this.analytics)
+    })
 
     this.formEl = document.createElement('slope-form')
     this.formEl.addEventListener('segment-submitted', this.segmentHandler)
     this.formEl.addEventListener('clear-all', this.clearAllHandler)
-    topSection.appendChild(this.formEl)
+    this.querySelector('.top-section')!.appendChild(this.formEl)
   }
 
   disconnectedCallback() {
@@ -35,14 +42,14 @@ export class Calculator extends HTMLElement {
     }
   }
 
-  private onSegment(ev: Event) {
+  private async onSegment(ev: Event) {
     const { detail } = ev as CustomEvent<SegmentData>
-    this.analytics.addSegment(detail)
+    await this.analytics.addSegment(detail)
     this.result.addSegment(this.analytics)
   }
 
-  private onClearAll() {
-    this.analytics.clearSegments()
+  private async onClearAll() {
+    await this.analytics.clearSegments()
     this.result.reset()
   }
 }
